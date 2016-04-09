@@ -8,9 +8,17 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
 </head>
 <body>
-  <h1>Gist HTML Preview</h1>
-  <p>gistpreview.github.io/?&lt;gist_id&gt;/&lt;file_name&gt;</p>
+  <div class="container">
+    <h2>Gist HTML Preview</h2>
+    <span>https://gistpreview.github.io/?</span>
+    <input type="text" class="form-control input-sm" id="gist_id" placeholder="Gist ID">
+    <span>/</span>
+    <input type="text" class="form-control input-sm" id="file_name" placeholder="File Name">
+    <button id="submit" class="btn btn-primary">Submit</button>
+  </div>
+
   <script src="https://cdn.rawgit.com/github/fetch/master/fetch.js"></script>
   <script src="./main.js"></script>
 </body>
 </html>
+
