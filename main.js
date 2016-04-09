@@ -7,9 +7,17 @@
       +  '</div>';
   }
 
-  document.getElementById('submit').onclick = function () {
+  function submit () {
+    // page will refresh
     location.search = document.getElementById('gist_id').value + '/'
                     + document.getElementById('file_name').value;
+  }
+
+  document.getElementById('submit').onclick = submit;
+  document.onkeypress = function (e) {
+    if (e.charCode === 13) {
+      submit();
+    }
   }
 
   // 1. check query string
