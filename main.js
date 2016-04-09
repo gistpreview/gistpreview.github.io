@@ -21,7 +21,7 @@
   // 2. get gist id and file name
   query = query.split('/');
   var gistId = query[0];
-  var fileName = query[1];
+  var fileName = decodeURIComponent(query[1]);
 
   // 3. write data to blank
   document.getElementById('gist_id').value = gistId;
