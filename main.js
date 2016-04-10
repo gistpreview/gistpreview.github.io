@@ -8,16 +8,18 @@
   }
 
   function submit () {
-    // page will refresh
-    location.search = document.getElementById('gist_id').value + '/'
-                    + document.getElementById('file_name').value;
+    var query = document.getElementById('gist_id').value;
+    var fileName = document.getElementById('file_name').value;
+    if (fileName) {
+      query += '/' + fileName;
+    }
+
+    location.search = query;  // page will be refreshed
   }
 
   document.getElementById('submit').onclick = submit;
   document.onkeypress = function (e) {
-    if (e.charCode === 13) {
-      submit();
-    }
+    if (e.charCode === 13) submit();
   }
 
   // 1. check query string
@@ -29,38 +31,38 @@
   // 2. get gist id and file name
   query = query.split('/');
   var gistId = query[0];
-  var fileName = decodeURIComponent(query[1]);
+  var fileName = decodeURIComponent(query[1] || '');
 
   // 3. write data to blank
   document.getElementById('gist_id').value = gistId;
   document.getElementById('file_name').value = fileName;
 
-  // 4-1. check gist id
-  if (gistId.length === 0 || /^[0-9a-f]*$/g.test(gistId) === false) {
-    showError('Gist Id <strong>' + gistId + '</strong> is invalid')
-    return;
-  }
-
-  // 4-2. check file name
-  if (typeof fileName !== 'string' || fileName.length === 0) {
-    showError('File Name <strong>' + fileName + '</strong> is invalid');
-    return;
-  }
-
-  // 5. fetch data
+  // 4. fetch data
   fetch('https://api.github.com/gists/' + gistId)
   .then(function (res) {
-    if (res.status !== 200) {
-      throw new Error('Gist Id <strong>' + gistId + '</strong> is not exist');
-    }
-    return res.json();
+    return res.json().then(function (body) {
+      if (res.status === 200) {
+        return body;
+      }
+      console.log(res, body); // debug
+      throw new Error('Gist <strong>' + gistId + '</strong>, ' + body.message.replace(/\(.*\)/, ''));
+    });
   })
   .then(function (info) {
+    if (fileName === '') {
+      for (var file in info.files) {
+        // index.html or the first file
+        if (fileName === '' || file === 'index.html') {
+          fileName = file;
+        }
+      }
+    }
+
     if (info.files.hasOwnProperty(fileName) === false) {
       throw new Error('File <strong>' + fileName + '</strong> is not exist');
     }
 
-    // 6. write data
+    // 5. write data
     var content = info.files[fileName].content;
     document.write(content);
   })

@@ -4,9 +4,13 @@ Preview HTML file on Gist
 
 ## Usage
 
-```
-GET https://gistpreview.github.io/?:gist_id/:file_name
-```
+1. Preview `index.html` or `the first file` in gist
+
+  `GET https://gistpreview.github.io/?:gist_id`
+
+2. Preview specifically `file_name` in gist
+
+  `GET https://gistpreview.github.io/?:gist_id/:file_name`
 
 ## Example
 
