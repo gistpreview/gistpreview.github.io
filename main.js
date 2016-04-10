@@ -1,4 +1,9 @@
 (function () {
+  function showMainPage () {
+    document.getElementById('main').className = 'container';  // remove class 'hide'
+    document.getElementById('loading').className += ' hide';  // add class 'hide'
+  }
+
   function showError (message) {
     document.getElementById('alert-box').innerHTML
       += '<div class="alert alert-danger">'
@@ -25,6 +30,7 @@
   // 1. check query string
   var query = location.search.substring(1);
   if (query.length === 0) {
+    showMainPage();
     return;
   }
 
@@ -67,6 +73,7 @@
     document.write(content);
   })
   .catch(function (err) {
+    showMainPage();
     showError(err.message);
   });
 })();
