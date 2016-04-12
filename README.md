@@ -4,17 +4,17 @@ Preview HTML file on Gist
 
 ## Usage
 
-1. Preview `index.html` or `the first file` in gist
+1. https://gistpreview.github.io/?:gist_id
 
-  `GET https://gistpreview.github.io/?:gist_id`
+  Preview __index.html__ or __the first file__ in gist.
 
-2. Preview specifically `file_name` in gist
-
-  `GET https://gistpreview.github.io/?:gist_id/:file_name`
+2. https://gistpreview.github.io/?:gist_id/:file_name
+  
+  Preview specific __file_name__ in gist.
 
 ## Example
 
-https://gist.github.com/zlargon/de2093842657a8b3d6d9ebb6ce0a7c59
+https://gist.github.com/zlargon/9de497580ac33180e6128c187e2a93bc
 
 ## Github API Rate Limiting
 
