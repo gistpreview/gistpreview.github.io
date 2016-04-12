@@ -18,13 +18,12 @@
     if (fileName) {
       query += '/' + fileName;
     }
-
     location.search = query;  // page will be refreshed
   }
 
   document.getElementById('submit').onclick = submit;
   document.onkeypress = function (e) {
-    if (e.charCode === 13) submit();
+    if (e.keyCode === 13) submit();
   }
 
   // 1. check query string
